@@ -1,6 +1,6 @@
 ![Logo](#)
 
-Robot Dick Library Program
+Robot Bumblebee Library Program
 
 ![img]()
 
@@ -10,14 +10,14 @@ Especificações:
 ## Instalação
 
 1. "Clone Download": ;
-2. Descompacte e modifique o nome da pasta para: "DICK" (Remova o '-master');
+2. Descompacte e modifique o nome da pasta para: "bumblebee" (Remova o '-master');
 3. Importe-a para sua pasta Library da sua IDE Arduino ou o diretório sketchbooks do Arduíno software;
 4. Restart Arduino IDE.
 
 ## Sintáxe
 ```Arduino 
 // Include lib.
-#include <DICK.h>
+#include <BUMBLEBEE.h>
 ```
 
 ## Sintáxe
@@ -31,30 +31,30 @@ Especificações:
  #define pinSpeedMotorRight 5 //PWM
 
  /**
-  * Instantiate an object of class DICK, passing parameters the connecting pins
+  * Instantiate an object of class BUMBLEBEE, passing parameters the connecting pins
   * where this on each pin of the H bridge L298N in Arduino doors.
   */ 
- DICK dick(pin1MotorLeft, pin2MotorLeft, pinSpeedMotorLeft, pin1MotorRight, pin2MotorRight, pinSpeedMotorRight);
+ BUMBLEBEE bee(pin1MotorLeft, pin2MotorLeft, pinSpeedMotorLeft, pin1MotorRight, pin2MotorRight, pinSpeedMotorRight);
 ```
 
 ```Arduino
 // engine connecting through switch positive value towards clockwise rotation and 100 -> value of the rotation speed.
-dick.move(100, 100);
+bee.move(100, 100);
 
 // call parameter passing engine negative direction of clockwise rotation and anti -100 -> value of the rotation speed.
-dick.move(-100, -100);
+bee.move(-100, -100);
 
 // off motor through parameter zero. 
-dick.move(0, 0);
+bee.move(0, 0);
 
 // off an engine through parameter zero.
-dick.move(100, 0);
+bee.move(100, 0);
 
 // off an engine through parameter zero.
-dick.move(0, 100);
+bee.move(0, 100);
 
 // off motor without parameter passing.
-dick.stop();
+bee.stop();
 ```
 
 ## Examples

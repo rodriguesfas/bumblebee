@@ -1,10 +1,10 @@
 # ===============================================================================
-# Syntax Coloring Map DICK
+# Syntax Coloring Map Bumblebee
 # KEYWORD1 = Class
 # KEYWORD2 = Métodos
 # ===============================================================================
 
-DICK KEYWORD1
+BUMBLEBEE KEYWORD1
 
 move KEYWORD2
 stop KEYWORD2

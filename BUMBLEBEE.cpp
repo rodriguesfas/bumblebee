@@ -1,7 +1,7 @@
 /**
  * ========================================================================================================================
- * @ Software: DICK Lib.
- * @ Description: Library Dick robot uses Driver Motor Bridge H L298N
+ * @ Software: BUMBLEBEE Lib.
+ * @ Description: Library Bumblebee robot uses Driver Motor Bridge H L298N
  * @ Version: 0.0.1
  * @ Data: 14 de setembro de 2016.
  * @ Developer: Rodrigues FAS
@@ -16,14 +16,14 @@
  * ========================================================================================================================
  */
 
- #include "DICK.h"
+ #include "BUMBLEBEE.h"
 
 /**
- * The DICK DICK :: Builder (x1, y1, z1, x2, y2, z2) sets the pins passed as parameter to exit and then assigns
+ * The BUMBLEBEE BUMBLEBEE :: Builder (x1, y1, z1, x2, y2, z2) sets the pins passed as parameter to exit and then assigns
  * Their values to private variables, so they possão be used by methods in classes
  * Future.
  */
- DICK::DICK(int pin1MotorLeft, int pin2MotorLeft, int pinSpeedMotorLeft, int pin1MotorRight, int pin2MotorRight, int pinSpeedMotorRight){
+ BUMBLEBEE::BUMBLEBEE(int pin1MotorLeft, int pin2MotorLeft, int pinSpeedMotorLeft, int pin1MotorRight, int pin2MotorRight, int pinSpeedMotorRight){
   /* Set pin as output. */
   pinMode(pin1MotorLeft, OUTPUT);
   pinMode(pin2MotorLeft, OUTPUT);
@@ -48,7 +48,7 @@
  * Negative values, turns towards antiorário.
  * Value of 0 to the engine.
 */
-void DICK::move(int speedMotorLeft, int speedMotorRight){
+void BUMBLEBEE::move(int speedMotorLeft, int speedMotorRight){
 
   /* pinSpeedMotorLeft */
   if(speedMotorLeft > 0){ //motor rotation clockwise.
@@ -85,7 +85,7 @@ void DICK::move(int speedMotorLeft, int speedMotorRight){
 /**
  * stop - for both engines.
  */
- void DICK::stop(){
+ void BUMBLEBEE::stop(){
 
   /* stop MotorLeft */
   digitalWrite(_pino1MotorLeft, LOW);

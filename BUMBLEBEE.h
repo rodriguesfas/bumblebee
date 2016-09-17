@@ -1,7 +1,7 @@
 /**
  * ========================================================================================================================
- * @ Software: DICK Lib.
- * @ Description: Library Dick robot uses Driver Motor Bridge H L298N
+ * @ Software: BUMBLEBEE Lib.
+ * @ Description: Library Bumblebee robot uses Driver Motor Bridge H L298N
  * @ Version: 0.0.1
  * @ Data: 14 de setembro de 2016.
  * @ Developer: Rodrigues FAS
@@ -20,16 +20,16 @@
  * Compilation policies - They do not allow statements / settings library could be inserted
  * More than once in a project.
  */
-#ifndef DICK_H
-#define DICK_H
+#ifndef BUMBLEBEE_H
+#define BUMBLEBEE_H
 
 /* It allows you to use, access to some Arduino functions. */
 #include <Arduino.h>
 
 /**
-* Class DICK -
+* Class BUMBLEBEE -
 */
-class DICK {
+class BUMBLEBEE {
 
 private:
   /* Sets pins engines */
@@ -43,7 +43,7 @@ private:
 
 public:
   /* Builder receives the corresponding pin output parameters. */
-  DICK(int pin1MotorLeft, int pin2MotorLeft, int pinSpeedMotorLeft, int pin1MotorRight, int pin2MotorRight, int pinSpeedMotorRight);
+  BUMBLEBEE(int pin1MotorLeft, int pin2MotorLeft, int pinSpeedMotorLeft, int pin1MotorRight, int pin2MotorRight, int pinSpeedMotorRight);
 
   /* Move method, receives engine speeds. */
   void move(int speedMotorLeft, int speedMotorRigth);

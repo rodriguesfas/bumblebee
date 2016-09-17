@@ -1,17 +1,18 @@
 /**
    ==========================================================================================
-   @ Software: DICK_Simple_Line_Follower
-   @ Description: Line follower
+   @ Software: Bumblebee_Simple_Line_Follower
+   @ Description: Simple Line follower
    @ Version: 0.0.1
    @ Data: 14 de setember de 2016
    @ Developer Rodrigues F. A. S.
    @ Site: rodriguesfas.com.br
    @ E-mail: franciscosouzaacer@gmail.com
    @ Translate from Portuguese to English with Google Translate
+   @ Website Lib. QTRSensors.h: <https://github.com/pololu/qtr-sensors-arduino/releases>
    ==========================================================================================
 */
-#include <DICK.h>
-#include <QTRSensors.h> // Dependency: https://github.com/pololu/qtr-sensors-arduino/releases
+#include <BUMBLEBEE.h>
+#include <QTRSensors.h>
 
 #define QUANT_SENSORS             5  /* Defined amount of sensors. */
 #define QUANT_SAMPLES_PER_SENSOR  5  /* sample mean by analog readings of each sensor */
@@ -19,7 +20,7 @@
 #define sensorLinePin1 1
 #define sensorLinePin2 2
 #define sensorLinePin3 3
-#define sensorLinePin4 4
+#define sensorLinePin4 6
 
 QTRSensorsAnalog qtra((unsigned char[]) {
   sensorLinePin0, sensorLinePin1, sensorLinePin2, sensorLinePin3, sensorLinePin4
@@ -27,7 +28,7 @@ QTRSensorsAnalog qtra((unsigned char[]) {
 unsigned int sensorValues[QUANT_SENSORS];
 
 /**
-   Instantiate an object of class DICK, passing parameters the connecting pins
+   Instantiate an object of class BUMBLEBEE, passing parameters the connecting pins
    where this on each pin of the H bridge L298N in Arduino doors.
 */
 #define pin1MotorLeft      2
@@ -36,7 +37,7 @@ unsigned int sensorValues[QUANT_SENSORS];
 #define pin1MotorRight     6
 #define pin2MotorRight     7
 #define pinSpeedMotorRight 5 //PWM
-DICK dick(pin1MotorLeft, pin2MotorLeft, pinSpeedMotorLeft, pin1MotorRight, pin2MotorRight, pinSpeedMotorRight);
+BUMBLEBEE bee(pin1MotorLeft, pin2MotorLeft, pinSpeedMotorLeft, pin1MotorRight, pin2MotorRight, pinSpeedMotorRight);
 
 /* Pin's LED RGB. */
 #define VERMELHO 10
@@ -66,14 +67,14 @@ void calibration() {
   ledRED(); /* bright red warning color, informs that the sensors are being calibrated. */
 
   /* Move robo in turning around themselves, for sensor calibration. Note .: Position the robot on the line. */
-  dick.move(-115, 115);
+  bee.move(-115, 115);
 
   /* Performs calibration in seconds. (Approximately 10s) */
   for (int i = 0; i < 100; i++) { //400
     qtra.calibrate(); /* Read all the sensors 10 times 2.5ms. (25ms for each call). */
   }
 
-  dick.stop();
+  bee.stop();
 
   /* Print calibration settings values. */
   // printCalibration();
@@ -134,34 +135,34 @@ void actionMotor() {
   */
 
   if (value[0] == 0 && value[1] == 0 && value[2] == 1 && value[3] == 0 && value[4] == 0) { /* move GO 0 */
-    dick.move(100, 100);
+    bee.move(100, 100);
   }
   else if (value[0] == 0 && value[1] == 0 && value[2] == 1 && value[3] == 0 && value[4] == 0) { /* move GO 1 */
-    dick.move(80, 80);
+    bee.move(80, 80);
   }
   /******************************************************************************************************************/
   else if (value[0] == 0 && value[1] == 1 && value[2] == 0 && value[3] == 0 && value[4] == 0) { /* move RIGHT 1 */
-    dick.move(100, 80);
+    bee.move(100, 80);
   }
   else if (value[0] == 1 && value[1] == 1 && value[2] == 0 && value[3] == 0 && value[4] == 0) { /* move RIGHT 2 */
-    dick.move(120, 80);
+    bee.move(120, 80);
   }
   else if (value[0] == 0 && value[1] == 0 && value[2] == 0 && value[3] == 0 && value[4] == 0) { /* move RIGHT 3 */
-    dick.move(150, 80);
+    bee.move(150, 80);
   }
   /******************************************************************************************************************/
   else if (value[0] == 0 && value[1] == 0 && value[2] == 0 && value[3] == 1 && value[4] == 0) { /* move LEFT 1 */
-    dick.move(100, 80);
+    bee.move(100, 80);
   }
   else if (value[0] == 0 && value[1] == 0 && value[2] == 0 && value[3] == 1 && value[4] == 1) { /* move LEFT 2 */
-    dick.move(120, 80);
+    bee.move(120, 80);
   }
   else if (value[0] == 0 && value[1] == 0 && value[2] == 0 && value[3] == 0 && value[4] == 1) { /* move LEFT 3 */
-    dick.move(150, 80);
+    bee.move(150, 80);
   }
   /******************************************************************************************************************/
   else if (value[0] == 1 && value[1] == 1 && value[2] == 1 && value[3] == 1 && value[4] == 1) { /* STOP */
-    dick.stop();
+    bee.stop();
   }
 
 }

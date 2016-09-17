@@ -1,6 +1,6 @@
 /**
    ==========================================================================================
-   @ Software: DICK_Line_Follower_PID
+   @ Software: Bumblebee_Line_Follower_PID
    @ Description: Line follower pid
    @ Version: 0.0.1
    @ Data: 14 de setember de 2016
@@ -8,12 +8,13 @@
    @ Site: rodriguesfas.com.br
    @ E-mail: franciscosouzaacer@gmail.com
    @ Translate from Portuguese to English with Google Translate
+   @ Website Lib. QTRSensors.h: <https://github.com/pololu/qtr-sensors-arduino/releases>
    ==========================================================================================
 */
 
 /* importe da lib. */
-#include <DICK.h>
-#include <QTRSensors.h> // Dependency: https://github.com/pololu/qtr-sensors-arduino/releases
+#include <BUMBLEBEE.h>
+#include <QTRSensors.h>
 
 #define QUANT_SENSORS             5  /* Defined amount of sensors. */
 #define QUANT_SAMPLES_PER_SENSOR  5  /* sample mean by analog readings of each sensor */
@@ -21,14 +22,14 @@
 #define sensorLinePin1 1
 #define sensorLinePin2 2
 #define sensorLinePin3 3
-#define sensorLinePin4 4
+#define sensorLinePin4 6
 QTRSensorsAnalog qtra((unsigned char[]) {
   sensorLinePin0, sensorLinePin1, sensorLinePin2, sensorLinePin3, sensorLinePin4
 }, QUANT_SENSORS, QUANT_SAMPLES_PER_SENSOR, QTR_NO_EMITTER_PIN);
 unsigned int sensorValues[QUANT_SENSORS];
 
 /**
-   Instantiate an object of class DICK, passing parameters the connecting pins
+   Instantiate an object of class BUMBLEBEE, passing parameters the connecting pins
    where this on each pin of the H bridge L298N in Arduino doors.
 */
 #define pin1MotorLeft      2
@@ -37,7 +38,7 @@ unsigned int sensorValues[QUANT_SENSORS];
 #define pin1MotorRight     6
 #define pin2MotorRight     7
 #define pinSpeedMotorRight 5 //PWM
-DICK dick(pin1MotorLeft, pin2MotorLeft, pinSpeedMotorLeft, pin1MotorRight, pin2MotorRight, pinSpeedMotorRight);
+BUMBLEBEE bee(pin1MotorLeft, pin2MotorLeft, pinSpeedMotorLeft, pin1MotorRight, pin2MotorRight, pinSpeedMotorRight);
 
 /* Pin's LED RGB. */
 #define VERMELHO 10
@@ -70,14 +71,14 @@ void calibration() {
   ledRED(); /* bright red warning color, informs that the sensors are being calibrated. */
 
   /* Move robo in turning around themselves, for sensor calibration. Note .: Position the robot on the line. */
-  dick.move(-115, 115);
+  bee.move(-115, 115);
 
   /* Performs calibration in seconds. (Approximately 10s) */
   for (int i = 0; i < 100; i++) { //400
     qtra.calibrate(); /* Read all the sensors 10 times 2.5ms. (25ms for each call). */
   }
 
-  dick.stop();
+  bee.stop();
 
   /* Print calibration settings values. */
   // printCalibration();
@@ -138,16 +139,16 @@ void linePID() {
 */
 void set_motors(int left_speed, int right_speed) {
   if (right_speed >= 0 && left_speed >= 0)
-    dick.move(right_speed, left_speed);
+    bee.move(right_speed, left_speed);
 
   if (right_speed >= 0 && left_speed < 0) {
     left_speed = -left_speed;
-    dick.move(right_speed, left_speed);
+    bee.move(right_speed, left_speed);
   }
 
   if (right_speed < 0 && left_speed >= 0) {
     right_speed = -right_speed;
-    dick.move(right_speed, left_speed);
+    bee.move(right_speed, left_speed);
   }
 }
 
